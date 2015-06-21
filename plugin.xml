@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="com.yeayyy.handrawing"
+        version="1.0.0">
+
+  <name>DrawingEditor</name>
+  <description>A Cordova plugin that displays Drawing Editor</description>
+
+  <engines>
+    <engine name="cordova" version=">=3.6.0" />
+  </engines>
+
+  <js-module src="www/drawing-editor.js" name="DrawingEditor">
+    <clobbers target="openDraw" />
+  </js-module>
+
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="DrawingEditor">
+        <param name="android-package" value="com.yeayyy.handrawing.DrawingEditor" />
+      </feature>
+    </config-file>
+    <source-file src="src/android/DrawingEditor.java" target-dir="src/com/yeayyy/handrawing" />
+    <source-file src="src/android/DrawingView.java" target-dir="src/com/yeayyy/handrawing" />
+    <source-file src="src/android/MainActivity.java" target-dir="src/com/yeayyy/handrawing" />
+    <config-file target="AndroidManifest.xml" parent="application">
+      <activity android:name="com.yeayyy.handrawing.MainActivity"></activity>
+    </config-file>
+  </platform>
+
+</plugin>
