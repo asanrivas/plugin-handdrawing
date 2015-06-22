@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yeayyy.myappp.R;
+import com.esra.phcs.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,6 +66,11 @@ public class MainActivity extends Activity implements OnClickListener {
             eraser = (ImageView) findViewById(R.id.eraser);
             eraser.setOnClickListener(this);
         }
+
+        String url = getIntent().getStringExtra("URL");
+        if(url != null) {
+            setImage(url);
+        }
     }
 
 
@@ -75,7 +80,28 @@ public class MainActivity extends Activity implements OnClickListener {
 //		getMenuInflater().inflate(R.menu.activity_main, menu);
 //		return true;
 //	}
+    private void setImage(String uri) {
+        setImage(Uri.parse(uri));
+    }
+    private void setImage(Uri selectedImage) {
+        InputStream imageStream = null;
+        try {
+            imageStream = getContentResolver().openInputStream(selectedImage);
+            Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
 
+            BitmapDrawable ob = new BitmapDrawable(getResources(), bitmap);
+
+            if(Build.VERSION.SDK_INT >= 16)
+            {
+                drawingView.setBackground(ob);
+            }else {
+                drawingView.setBackgroundDrawable(ob);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onClick(View v) {

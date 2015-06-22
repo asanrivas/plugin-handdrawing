@@ -11,7 +11,7 @@
     </engines>
 
     <js-module src="www/drawing-editor.js" name="DrawingEditor">
-        <clobbers target="openDraw" />
+        <clobbers target="handdrawing" />
     </js-module>
 
     <!-- android -->
