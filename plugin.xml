@@ -1,32 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="com.yeayyy.handrawing"
-        version="1.0.0">
+    id="com.yeayyy.handrawing"
+    version="1.0.0">
 
-  <name>DrawingEditor</name>
-  <description>A Cordova plugin that displays Drawing Editor</description>
+    <name>DrawingEditor</name>
+    <description>A Cordova plugin that displays Drawing Editor</description>
 
-  <engines>
-    <engine name="cordova" version=">=3.6.0" />
-  </engines>
+    <engines>
+        <engine name="cordova" version=">=3.6.0" />
+    </engines>
 
-  <js-module src="www/drawing-editor.js" name="DrawingEditor">
-    <clobbers target="openDraw" />
-  </js-module>
+    <js-module src="www/drawing-editor.js" name="DrawingEditor">
+        <clobbers target="openDraw" />
+    </js-module>
 
-  <!-- android -->
-  <platform name="android">
-    <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="DrawingEditor">
-        <param name="android-package" value="com.yeayyy.handrawing.DrawingEditor" />
-      </feature>
-    </config-file>
-    <source-file src="src/android/DrawingEditor.java" target-dir="src/com/yeayyy/handrawing" />
-    <source-file src="src/android/DrawingView.java" target-dir="src/com/yeayyy/handrawing" />
-    <source-file src="src/android/MainActivity.java" target-dir="src/com/yeayyy/handrawing" />
-    <config-file target="AndroidManifest.xml" parent="application">
-      <activity android:name="com.yeayyy.handrawing.MainActivity"></activity>
-    </config-file>
-  </platform>
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="DrawingEditor">
+                <param name="android-package" value="com.yeayyy.handrawing.DrawingEditor" />
+            </feature>
+        </config-file>
+        <source-file src="src/android/DrawingEditor.java" target-dir="src/com/yeayyy/handrawing" />
+        <source-file src="src/android/DrawingView.java" target-dir="src/com/yeayyy/handrawing" />
+        <source-file src="src/android/MainActivity.java" target-dir="src/com/yeayyy/handrawing" />
+
+        <!--  drawable src/android/resources -->
+        <resource-file src="src/android/res/drawable/eraser.png" target="res/drawable/eraser.png" />
+        <resource-file src="src/android/res/drawable/eraser.png" target="res/drawable/eraser.png" />
+        <resource-file src="src/android/res/drawable/pannel.xml" target="res/drawable/pannel.xml" />
+        <resource-file src="src/android/res/drawable/pencil.png" target="res/drawable/pencil.png" />
+
+        <resource-file src="src/android/res/drawable-hdpi/ic_action_camera.png" target="res/drawable-hdpi/ic_action_camera.png" />
+        <resource-file src="src/android/res/drawable-hdpi/ic_action_discard.png" target="res/drawable-hdpi/ic_action_discard.png" />
+        <resource-file src="src/android/res/drawable-hdpi/ic_action_next_item.png" target="res/drawable-hdpi/ic_action_next_item.png" />
+        <resource-file src="src/android/res/drawable-hdpi/ic_action_previous_item.png" target="res/drawable-hdpi/ic_action_previous_item.png" />
+        <resource-file src="src/android/res/drawable-hdpi/ic_action_remove.png" target="res/drawable-hdpi/ic_action_remove.png" />
+        <resource-file src="src/android/res/drawable-hdpi/ic_action_save.png" target="res/drawable-hdpi/ic_action_save.png" />
+        <resource-file src="src/android/res/drawable-hdpi/ic_action_share.png" target="res/drawable-hdpi/ic_action_share.png" />
+
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_camera.png" target="res/drawable-mdpi/ic_action_camera.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_discard.png" target="res/drawable-mdpi/ic_action_discard.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_next_item.png" target="res/drawable-mdpi/ic_action_next_item.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_previous_item.png" target="res/drawable-mdpi/ic_action_previous_item.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_remove.png" target="res/drawable-mdpi/ic_action_remove.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_save.png" target="res/drawable-mdpi/ic_action_save.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_share.png" target="res/drawable-mdpi/ic_action_share.png" />
+
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_camera.png" target="res/drawable-xhdpi/ic_action_camera.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_discard.png" target="res/drawable-xhdpi/ic_action_discard.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_next_item.png" target="res/drawable-xhdpi/ic_action_next_item.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_previous_item.png" target="res/drawable-xhdpi/ic_action_previous_item.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_remove.png" target="res/drawable-xhdpi/ic_action_remove.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_save.png" target="res/drawable-xhdpi/ic_action_save.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_share.png" target="res/drawable-xhdpi/ic_action_share.png" />
+
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_camera.png" target="res/drawable-xxhdpi/ic_action_camera.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_discard.png" target="res/drawable-xxhdpi/ic_action_discard.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_next_item.png" target="res/drawable-xxhdpi/ic_action_next_item.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_previous_item.png" target="res/drawable-xxhdpi/ic_action_previous_item.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_remove.png" target="res/drawable-xxhdpi/ic_action_remove.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_save.png" target="res/drawable-xxhdpi/ic_action_save.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_share.png" target="res/drawable-xxhdpi/ic_action_share.png" />
+
+        <config-file target="AndroidManifest.xml" parent="application">
+            <activity android:name="com.yeayyy.handrawing.MainActivity"></activity>
+        </config-file>
+    </platform>
 
 </plugin>
