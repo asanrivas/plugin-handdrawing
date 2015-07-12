@@ -67,10 +67,6 @@
         <config-file target="AndroidManifest.xml" parent="application">
             <activity android:name="com.yeayyy.handrawing.MainActivity"></activity>
         </config-file>
-        
-         <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
-        </config-file>
     </platform>
 
 </plugin>
