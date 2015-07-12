@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.esra.phcs.R;
 
@@ -30,7 +31,7 @@ public class MainActivity extends Activity implements OnClickListener {
     private final String tag = "MainActivity";
 
     private ImageView eraser;
-    private Button btnChooseImage;
+    private Button btnChooseImage, btnSaveAndReturn;
     private ImageButton btnClear, btnSave, btnShare, btnCamera;
 
     private DrawingView drawingView;
@@ -48,14 +49,17 @@ public class MainActivity extends Activity implements OnClickListener {
 
             drawingView = (DrawingView) findViewById(R.id.drawing);
 
-            btnChooseImage = (Button) findViewById(R.id.btnChooseImage);
-            btnChooseImage.setOnClickListener(this);
+//            btnChooseImage = (Button) findViewById(R.id.btnChooseImage);
+//            btnChooseImage.setOnClickListener(this);
 
             btnClear = (ImageButton) findViewById(R.id.btnClear);
             btnClear.setOnClickListener(this);
 
             btnSave = (ImageButton) findViewById(R.id.btnSave);
             btnSave.setOnClickListener(this);
+
+            btnSaveAndReturn = (Button) findViewById(R.id.btnSaveImage);
+            btnSaveAndReturn.setOnClickListener(this);
 
             btnShare = (ImageButton) findViewById(R.id.btnShare);
             btnShare.setOnClickListener(this);
@@ -74,12 +78,7 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.activity_main, menu);
-//		return true;
-//	}
+
     private void setImage(String uri) {
         setImage(Uri.parse(uri));
     }
@@ -126,9 +125,18 @@ public class MainActivity extends Activity implements OnClickListener {
             drawingView.reset();
             drawingView.setBackground(null);
 
-        } else if (v == btnSave) {
+//        } else if (v == btnSave) {
+//
+//            saveImage();
 
-            saveImage();
+        } else if (v == btnSaveAndReturn) {
+
+            String url = Uri.parse(saveImage().getAbsolutePath()).toString();
+
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result", url);
+            setResult(RESULT_OK, returnIntent);
+            finish();
 
         } else if (v == btnCamera) {
 
@@ -153,16 +161,31 @@ public class MainActivity extends Activity implements OnClickListener {
 
     }
 
+    public File getAlbumStorageDir(String albumName) {
+        // Get the directory for the user's public pictures directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), albumName);
+        if (!file.mkdirs()) {
+//            Log.e(LOG_TAG, "Directory not created");
+        }
+        return file;
+    }
+
 
     public File saveImage() {
         drawingView.setDrawingCacheEnabled(true);
         Bitmap bm = drawingView.getDrawingCache();
 
         File fPath = Environment.getExternalStorageDirectory();
+        String pathToExternalStorage = Environment.getExternalStorageDirectory().toString();
+// have the object build the directory structure, if needed.
+        File appDirectory = new File(pathToExternalStorage + "/" + ".handdrawing");
+
+        appDirectory.mkdirs();
 
         File f = null;
 
-        f = new File(fPath, UUID.randomUUID().toString() + ".png");
+        f = new File(appDirectory, UUID.randomUUID().toString() + ".png");
 
         try {
             FileOutputStream strm = new FileOutputStream(f);

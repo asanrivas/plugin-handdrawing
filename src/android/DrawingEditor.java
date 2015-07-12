@@ -27,14 +27,16 @@ import java.util.regex.Pattern;
  */
 
 public class DrawingEditor extends CordovaPlugin {
-
+    static final int PICK_IMAGE_REQUEST = 1;
+    CallbackContext callbackContext;
     @Override
     public boolean execute(String action, CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
         Log.v("DrawingActivity", "entered my domain");
         if (action.compareTo("openDraw") == 0)
         {
             String message = args.getString(0);
-            this.echo(message, callbackContext);
+
+            this.callbackContext = callbackContext;
 
             Intent i = new Intent();
             Context context=this.cordova.getActivity().getApplicationContext();
@@ -47,11 +49,27 @@ public class DrawingEditor extends CordovaPlugin {
             }
 
             //context.startActivity(intent);
-            cordova.getActivity().startActivity(intent);
+            this.cordova.startActivityForResult(this, intent, PICK_IMAGE_REQUEST);
             return true;
         }
 
         return false;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        switch (requestCode) {
+            case PICK_IMAGE_REQUEST: //integer matching the integer suplied when starting the activity
+                if(resultCode == android.app.Activity.RESULT_OK){
+                    //in case of success return the string to javascript
+
+                    String result=intent.getStringExtra("result");
+                    Log.v("pick image", result);
+                    this.callbackContext.success(result);
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     private void echo(String message, CallbackContext callbackContext) {
