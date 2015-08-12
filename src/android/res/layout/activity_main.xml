@@ -58,25 +58,27 @@
             android:src="@drawable/ic_action_camera"
             android:background="#000000"
             />
+        <ImageView
+            android:id="@+id/eraser"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/eraser"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/btnCamera"
+            android:layout_toEndOf="@+id/btnCamera" />
 
         <Button
             android:id="@+id/btnSaveImage"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
             android:textColor="#FFFFFF"
             android:background="#000000"
             android:text="Save and Return"
-            android:layout_toRightOf="@+id/btnCamera" />
-
-        <ImageView
-            android:id="@+id/eraser"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/eraser"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/eraser" />
-
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 </LinearLayout>
