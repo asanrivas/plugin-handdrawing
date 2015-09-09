@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Size;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,6 +36,7 @@ public class MainActivity extends Activity implements OnClickListener {
     private ImageButton btnClear, btnSave, btnShare, btnCamera;
 
     private DrawingView drawingView;
+    private Size size;
 
     private static final int SELECT_PHOTO = 100;
     private static final int CAMERA_REQUEST = 1888;
@@ -87,8 +89,9 @@ public class MainActivity extends Activity implements OnClickListener {
         try {
             imageStream = getContentResolver().openInputStream(selectedImage);
             Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+            size = new Size(bitmap.getWidth(), bitmap.getHeight());
 
-            BitmapDrawable ob = new BitmapDrawable(getResources(), bitmap);
+            BitmapDrawable ob = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true));
 
             if(Build.VERSION.SDK_INT >= 16)
             {
@@ -174,7 +177,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public File saveImage() {
         drawingView.setDrawingCacheEnabled(true);
-        Bitmap bm = drawingView.getDrawingCache();
+        Bitmap bm = Bitmap.createScaledBitmap(drawingView.getDrawingCache(), size.getWidth()*2, size.getHeight()*2, false);
 
         File fPath = Environment.getExternalStorageDirectory();
         String pathToExternalStorage = Environment.getExternalStorageDirectory().toString();
